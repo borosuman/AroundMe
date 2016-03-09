@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+	<link rel="shortcut icon" href="images/favicon.png">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="stylesheet" href="css/test.css">
+	<link rel="stylesheet" href="jqueryMobile/jquery.mobile-1.4.5.min.css">
+	<script src="js/initOptions.js"></script>
+	<script src="js/test.js"></script>
+	<script src="js/messages.js"></script>
+	<script>window.$ = window.jQuery = WLJQ;</script>
+	<script  src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=true"></script>
+    
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script type="text/javascript">
+    var myScroll;
+
+function loaded () {
+	myScroll = new IScroll('#wrapper');
+}
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+   </script>
+</head>
+<body id="content" style="display: none;" onload="getLocation()">
+	<!--application UI goes here-->
+<!-- ################################################################################################# -->
+	
+	<div data-role="page" id="home" >
+		<div data-role="header"  style="background-color:#2d89ef">
+			<div class="ui-grid-b">
+				<div class="ui-block-a"><div class="ui-bar ui-bar-c"  style="height:30px">
+				<a data-role="button" data-icon="bullets" href="#panel1" data-iconpos="notext" data-theme="b"></a></div></div>
+				<div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:30px">
+						AroundMe
+					</div></div>
+				<div class="ui-block-c"><div class="ui-bar ui-bar-c" style="height:30px; text-align:right"><a href="#panel2"  data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b"></a></div></div>
+				
+			</div>
+            <br>
+		</div>
+		<div data-role="content">
+		
+			<table style="width:100%">
+    		  <tr>
+        		<th >
+        		<input id="input" data-mini="true" class="controls" type="search" placeholder="Hotels,Restaurants,Attraction">
+        		</th>
+       		 <th >
+       		 	<div class="key">
+					<a id="keyword" class="ui-btn ui-icon-search ui-btn-icon-notext ui-corner-all" data-icon="search" onclick="getInput()">search</a>
+				</div>
+			</th>
+     		 </tr>
+		  </table>
+	
+		
+			
+			<a data-role="button" id="back" data-mini="true" style="display:none" onclick="listSwitch()">Back to results</a>
+			
+			<div id="listResult" style="display:none; font-size:13px; text-align:center">
+				<div id="listMap">			
+				<div class="segmented-control ui-bar-d">
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a data-role="button" onclick="listSwitch()" data-theme="b">List</a>
+					<a data-role="button" onclick="mapSwitch()">Map</a>
+					</fieldset>
+				</div>
+				</div>		
+				<hr>
+				<div id="wrapper">	
+					 <div id="scroller">
+					<ul id="list"></ul>
+					</div>
+				</div>
+		   </div>
+		   
+		    
+			<div id="currMapholder" >
+				</div>	
+				<div id="searchMapholder" ></div>
+				<div id="dirMapholder" ></div>	
+			
+		</div>
+		<div data-role="footer">
+			<div style="background-color:#2d89ef; height:40px; width:320px">
+			<br><img border="0" src="images/powered-by-google-on-non-white.png">
+			</div>
+		</div>
+		
+		<div  data-role="panel"  data-display="overlay" id="panel1" >
+	            <div  style="background-color:#2d89ef; height:40px; width:240px" >
+	            Select Category
+	            </div>
+	            <div class="panel1List">
+	     			<ul data-role="listview" >
+	            	<li><a data-role="button" id="bank" onclick="getInput()"><img src="images/bank.png" class="ui-li-icon ui-corner-none" >Bank</a></li>
+	            	<li><a data-role="button" id="atm" onclick="getInput()"><img src="images/atm.png"   class="ui-li-icon">Atm</a></li>
+	            	<li><a data-role="button" id="gas_station" onclick="getInput()"><img src="images/gas_station.png"  class="ui-li-icon">Gas Station</a></li>
+	            	<li><a data-role="button" id="movie_theater" onclick="getInput()"><img src="images/movie.png"  class="ui-li-icon">Movie Theater</a></li>
+	            	<li><a data-role="button" id="night_club" onclick="getInput()"><img src="images/pub.png"  class="ui-li-icon ui-corner-none">Pub</a></li>
+					<li><a data-role="button" id="restaurant" onclick="getInput()"><img src="images/restaurants.png"  class="ui-li-icon">Restaurant</a></li>				
+				    <li><a data-role="button" id="cafe" onclick="getInput()"><img src="images/cafe.png"  class="ui-li-icon">Cafe</a></li>
+					</ul>
+				</div>
+		</div>
+		
+		<div data-role="panel"  data-display="overlay" id="panel2" data-position="right">
+	            <div  style="background-color:#2d89ef; height:40px; width:240px" >
+	            Select options
+	            </div>
+	            <fieldset data-role="controlgroup">
+	            		   <input type="radio" name="radio-choice-1" id="sortByDistance" value="sortByDistance" checked="checked">
+	            		   <label for="sortByDistance">Sort by distance</label>
+	            		   <input type="radio" name="radio-choice-1" id="sortByRating" value="sortByRating">
+	            		   <label for="sortByRating">Sort by rating</label>
+	            </fieldset>
+		</div>
+</div>			
+
+</body>
+</html>
